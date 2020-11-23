@@ -1,0 +1,172 @@
+﻿<process name="CRUD" version="1.0" bpversion="6.9.0.26970" narrative="CRUD operations" byrefcollection="true" type="object" runmode="Exclusive" preferredid="c606af68-6e98-46b2-9923-2e3e0dc0e31f">
+  <appdef>
+    <element name="Application Root">
+      <id>6adcbc9f-20c4-4d22-acb5-dbecc040c0a3</id>
+      <type>Application</type>
+      <basetype>Application</basetype>
+      <datatype>unknown</datatype>
+      <diagnose>False</diagnose>
+    </element>
+  </appdef>
+  <view>
+    <camerax>0</camerax>
+    <cameray>0</cameray>
+    <zoom version="2">1.25</zoom>
+  </view>
+  <preconditions />
+  <endpoint narrative="" />
+  <stage stageid="dddfd0cb-5639-444b-9ecf-596e0cb26ee0" name="CRUD" type="SubSheetInfo">
+    <display x="-195" y="-105" w="150" h="90" />
+  </stage>
+  <stage stageid="38e59c85-30a9-45ba-a6ed-e422e1c6483d" name="Start" type="Start">
+    <loginhibit />
+    <display x="15" y="-180" />
+    <onsuccess>3083488d-624c-4d2b-af0b-a0f05dd88aea</onsuccess>
+  </stage>
+  <stage stageid="857c85a9-6357-4246-a198-87949087d442" name="End" type="End">
+    <loginhibit />
+    <display x="15" y="90" />
+  </stage>
+  <stage stageid="3083488d-624c-4d2b-af0b-a0f05dd88aea" name="Data - SQL Server::Set Connection" type="Action">
+    <loginhibit onsuccess="true" />
+    <display x="15" y="-135" />
+    <inputs>
+      <input type="text" name="Server" friendlyname="Server" narrative="The name of the server and, if necessary, instance name of the SQL Server instance to connect to" expr="&quot;(LocalDB)\BluePrismLocalDB&quot;" />
+      <input type="text" name="Database" friendlyname="Database" narrative="The name of the database to connect to" expr="&quot;AddressBookDatabase&quot;" />
+      <input type="text" name="User" friendlyname="User" narrative="If appropriate, the login name to use to connect to SQL Server. If left empty, windows authentication using the current user will be used instead of SQL Server authentication" expr="" />
+      <input type="password" name="Password" friendlyname="Password" narrative="If appropriate, the password to use with the above login name to access SQL Server. Unused for windows authentication" expr="" />
+    </inputs>
+    <onsuccess>c93ffbaa-54c6-464a-bb7e-f7c16ccd3455</onsuccess>
+    <resource object="Data - SQL Server" action="Set Connection" />
+  </stage>
+  <stage stageid="c93ffbaa-54c6-464a-bb7e-f7c16ccd3455" name="Add data to database" type="Action">
+    <loginhibit onsuccess="true" />
+    <display x="15" y="-90" />
+    <inputs>
+      <input type="text" name="Query" friendlyname="Query" narrative="The SQL query to use to perform this action" expr="&quot;insert into [AddressBookDatabase].[dbo].[Contacts] values(&#xA;'&quot;&amp;[FirstName]&amp;&quot;',&#xA;'&quot;&amp;[LastName]&amp;&quot;',&#xA;'&quot;&amp;[Address]&amp;&quot;',&#xA;'&quot;&amp;[City]&amp;&quot;',&#xA;'&quot;&amp;[State]&amp;&quot;',&#xA;'&quot;&amp;[Zip]&amp;&quot;',&#xA;'&quot;&amp;[Phone]&amp;&quot;',&#xA;'&quot;&amp;[Email]&amp;&quot;'&#xA;)&quot;&#xA;" />
+    </inputs>
+    <outputs>
+      <output type="flag" name="Success" friendlyname="Success" narrative="Flag indicating success (True) or failure (False)" stage="" />
+      <output type="text" name="Message" friendlyname="Message" narrative="Error message giving detail regarding why this action failed" stage="" />
+    </outputs>
+    <onsuccess>1d8bbddd-a92e-4bd2-a644-c0a0de404ad9</onsuccess>
+    <resource object="Data - SQL Server" action="Execute" />
+  </stage>
+  <stage stageid="11cf8c95-7f12-485f-b6c6-4146f975e3ba" name="FirstName" type="Data">
+    <loginhibit />
+    <display x="165" y="-165" />
+    <datatype>text</datatype>
+    <initialvalue xml:space="preserve">Dipto</initialvalue>
+    <private />
+    <alwaysinit />
+  </stage>
+  <stage stageid="89bff66d-706c-4919-84ee-ce00fdfb8535" name="LastName" type="Data">
+    <loginhibit />
+    <display x="165" y="-135" />
+    <datatype>text</datatype>
+    <initialvalue xml:space="preserve">Biswas</initialvalue>
+    <private />
+    <alwaysinit />
+  </stage>
+  <stage stageid="5191c947-5046-4c3c-b154-e25ad2e92c58" name="Address" type="Data">
+    <loginhibit />
+    <display x="165" y="-105" />
+    <datatype>text</datatype>
+    <initialvalue xml:space="preserve">Rahara</initialvalue>
+    <private />
+    <alwaysinit />
+  </stage>
+  <stage stageid="1c4af8f0-d339-40f8-8dbd-85330f142646" name="City" type="Data">
+    <loginhibit />
+    <display x="165" y="-75" />
+    <datatype>text</datatype>
+    <initialvalue xml:space="preserve">Kolkata</initialvalue>
+    <private />
+    <alwaysinit />
+  </stage>
+  <stage stageid="2693becd-2f36-4f0c-b330-b37df220f83a" name="State" type="Data">
+    <loginhibit />
+    <display x="165" y="-45" />
+    <datatype>text</datatype>
+    <initialvalue xml:space="preserve">West Bengal</initialvalue>
+    <private />
+    <alwaysinit />
+  </stage>
+  <stage stageid="7dfc1ff5-e9cd-4c42-bfca-0e1fef53150c" name="Zip" type="Data">
+    <loginhibit />
+    <display x="165" y="-15" />
+    <datatype>text</datatype>
+    <initialvalue xml:space="preserve">700118</initialvalue>
+    <private />
+    <alwaysinit />
+  </stage>
+  <stage stageid="05732995-f49d-44db-b3dc-c57b361f0aa7" name="Phone" type="Data">
+    <loginhibit />
+    <display x="165" y="15" />
+    <datatype>text</datatype>
+    <initialvalue xml:space="preserve">9876543210</initialvalue>
+    <private />
+    <alwaysinit />
+  </stage>
+  <stage stageid="eb849fdb-5993-4c52-97dc-2c38f679ea1e" name="Email" type="Data">
+    <loginhibit />
+    <display x="165" y="45" />
+    <datatype>text</datatype>
+    <initialvalue xml:space="preserve">diptobiswas@gmail.com</initialvalue>
+    <private />
+    <alwaysinit />
+  </stage>
+  <stage stageid="1d8bbddd-a92e-4bd2-a644-c0a0de404ad9" name="Read" type="Action">
+    <loginhibit onsuccess="true" />
+    <display x="15" y="-45" />
+    <inputs>
+      <input type="text" name="SQL" friendlyname="SQL" narrative="The SQL query to use to perform this action" expr="&quot;SELECT * from [AddressBookDatabase].[dbo].[Contacts]&quot;" />
+    </inputs>
+    <outputs>
+      <output type="flag" name="Success" friendlyname="Success" narrative="Flag indicating success (True) or failure (False)" stage="Success" />
+      <output type="text" name="Message" friendlyname="Message" narrative="Error message giving detail regarding why this action failed" stage="" />
+      <output type="collection" name="Results" friendlyname="Results" narrative="The collection of results from the query" stage="Results" />
+    </outputs>
+    <onsuccess>47f5007f-d613-43c2-95ff-36b8a293f2b0</onsuccess>
+    <resource object="Data - SQL Server" action="Get Collection" />
+  </stage>
+  <stage stageid="482a9106-f7e5-4139-8dc8-061eb1cf8637" name="Results" type="Collection">
+    <display x="90" y="-45" />
+    <datatype>collection</datatype>
+    <private />
+    <alwaysinit />
+  </stage>
+  <stage stageid="3968c578-3b32-4070-bdef-0f9ffdb00164" name="Success" type="Data">
+    <display x="-60" y="-45" />
+    <datatype>flag</datatype>
+    <initialvalue />
+    <private />
+    <alwaysinit />
+  </stage>
+  <stage stageid="47f5007f-d613-43c2-95ff-36b8a293f2b0" name="Update" type="Action">
+    <loginhibit onsuccess="true" />
+    <display x="15" y="0" />
+    <inputs>
+      <input type="text" name="Query" friendlyname="Query" narrative="The SQL query to use to perform this action" expr="&quot;UPDATE [AddressBookDatabase].[dbo].[Contacts]&#xA;SET FirstName = 'Arya', City= 'Khardah'&#xA;WHERE FirstName = 'Dipto';&quot;" />
+    </inputs>
+    <outputs>
+      <output type="flag" name="Success" friendlyname="Success" narrative="Flag indicating success (True) or failure (False)" stage="" />
+      <output type="text" name="Message" friendlyname="Message" narrative="Error message giving detail regarding why this action failed" stage="" />
+    </outputs>
+    <onsuccess>065d61d1-fd45-47b1-99a7-0c9759457775</onsuccess>
+    <resource object="Data - SQL Server" action="Execute" />
+  </stage>
+  <stage stageid="065d61d1-fd45-47b1-99a7-0c9759457775" name="Delete" type="Action">
+    <loginhibit onsuccess="true" />
+    <display x="15" y="45" />
+    <inputs>
+      <input type="text" name="Query" friendlyname="Query" narrative="The SQL query to use to perform this action" expr="&quot;delete from [AddressBookDatabase].[dbo].[Contacts]&#xA;WHERE City= 'Khardah'&quot;" />
+    </inputs>
+    <outputs>
+      <output type="flag" name="Success" friendlyname="Success" narrative="Flag indicating success (True) or failure (False)" stage="" />
+      <output type="text" name="Message" friendlyname="Message" narrative="Error message giving detail regarding why this action failed" stage="" />
+    </outputs>
+    <onsuccess>857c85a9-6357-4246-a198-87949087d442</onsuccess>
+    <resource object="Data - SQL Server" action="Execute" />
+  </stage>
+</process>

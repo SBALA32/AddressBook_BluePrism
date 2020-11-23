@@ -1,0 +1,70 @@
+﻿<process name="Get Info by name" version="1.0" bpversion="6.9.0.26970" narrative="CRUD operations" byrefcollection="true" type="object" runmode="Exclusive" preferredid="c606af68-6e98-46b2-9923-2e3e0dc0e31f">
+  <appdef>
+    <element name="Application Root">
+      <id>6adcbc9f-20c4-4d22-acb5-dbecc040c0a3</id>
+      <type>Application</type>
+      <basetype>Application</basetype>
+      <datatype>unknown</datatype>
+      <diagnose>False</diagnose>
+    </element>
+  </appdef>
+  <view>
+    <camerax>0</camerax>
+    <cameray>0</cameray>
+    <zoom version="2">1.25</zoom>
+  </view>
+  <preconditions />
+  <endpoint narrative="" />
+  <stage stageid="944faba5-e975-4405-bb85-a1348f7251ea" name="Get Info by name" type="SubSheetInfo">
+    <display x="-195" y="-105" w="150" h="90" />
+  </stage>
+  <stage stageid="c91d6a14-72e3-4ca6-8805-ca5ed42f6516" name="Start" type="Start">
+    <loginhibit />
+    <display x="15" y="-105" />
+    <onsuccess>fa052653-516c-4078-b082-416169930e51</onsuccess>
+  </stage>
+  <stage stageid="b5173de1-602f-4ee0-9e4b-8d4585d35750" name="End" type="End">
+    <loginhibit />
+    <display x="15" y="90" />
+  </stage>
+  <stage stageid="fa052653-516c-4078-b082-416169930e51" name="Data - SQL Server::Set Connection" type="Action">
+    <loginhibit onsuccess="true" />
+    <display x="15" y="-60" />
+    <inputs>
+      <input type="text" name="Server" friendlyname="Server" narrative="The name of the server and, if necessary, instance name of the SQL Server instance to connect to" expr="&quot;(LocalDB)\BluePrismLocalDB&quot;" />
+      <input type="text" name="Database" friendlyname="Database" narrative="The name of the database to connect to" expr="&quot;AddressBookDatabase&quot;" />
+      <input type="text" name="User" friendlyname="User" narrative="If appropriate, the login name to use to connect to SQL Server. If left empty, windows authentication using the current user will be used instead of SQL Server authentication" expr="" />
+      <input type="password" name="Password" friendlyname="Password" narrative="If appropriate, the password to use with the above login name to access SQL Server. Unused for windows authentication" expr="" />
+    </inputs>
+    <onsuccess>0ffe76ce-f839-47cb-b794-26b41c1ed593</onsuccess>
+    <resource object="Data - SQL Server" action="Set Connection" />
+  </stage>
+  <stage stageid="5761d5e5-1ea7-4e3d-a9e3-a15ae5e70e7b" name="Name" type="Data">
+    <loginhibit />
+    <display x="195" y="-15" />
+    <datatype>text</datatype>
+    <initialvalue xml:space="preserve">Mario</initialvalue>
+    <private />
+    <alwaysinit />
+  </stage>
+  <stage stageid="0ffe76ce-f839-47cb-b794-26b41c1ed593" name="get info by name" type="Action">
+    <loginhibit onsuccess="true" />
+    <display x="15" y="-15" />
+    <inputs>
+      <input type="text" name="SQL" friendlyname="SQL" narrative="The SQL query to use to perform this action" expr="&quot;SELECT * from [AddressBookDatabase].[dbo].[Contacts] where FirstName='&quot;&amp;[Name]&amp;&quot;'&quot;&#xA;" />
+    </inputs>
+    <outputs>
+      <output type="flag" name="Success" friendlyname="Success" narrative="Flag indicating success (True) or failure (False)" stage="" />
+      <output type="text" name="Message" friendlyname="Message" narrative="Error message giving detail regarding why this action failed" stage="" />
+      <output type="collection" name="Results" friendlyname="Results" narrative="The collection of results from the query" stage="Results" />
+    </outputs>
+    <onsuccess>b5173de1-602f-4ee0-9e4b-8d4585d35750</onsuccess>
+    <resource object="Data - SQL Server" action="Get Collection" />
+  </stage>
+  <stage stageid="b526fb9d-9a0e-451e-bf85-b84d407bc24c" name="Results" type="Collection">
+    <display x="90" y="-15" />
+    <datatype>collection</datatype>
+    <private />
+    <alwaysinit />
+  </stage>
+</process>
